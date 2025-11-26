@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mexvofd"
+version = "1.0"
+description = "The --VOFD Python package-- provides tools for simulating and solving --Variable-Order Fractional Derivatives (VOFD)-- in dynamical systems. This package is designed for researchers and practitioners to analyze and visualize systems modeled with variable-order derivatives, such as chaotic systems, hereditary processes, and control strategies."
+authors = [
+  { name="Daniel Clemente-Lopez, Jesus M. Munoz-Pacheco, Jose de Jesus Rangel-Magdaleno", email="dclemente@inaoep.mx" }
+]
+readme = "README.md"
+requires-python = ">=3.8"
+
+dependencies = [
+    "numpy",
+    "matplotlib",
+    "numba"
+]
