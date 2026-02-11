@@ -1,2 +1,2 @@
 from .sim_manager import v1_alg, v2_alg, v3_alg, v1_bifurcation, v2_bifurcation, v3_bifurcation, bifurcation_process
-from .plot_data   import save_pairwise_plots, save_time_series, create_bif_figure, save_bifurcation_data
+from .plot_data   import create_xy_figure, save_pairwise_plots, save_time_series, save_bifurcation_data

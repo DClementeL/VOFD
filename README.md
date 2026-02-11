@@ -23,24 +23,11 @@ VOFD provides high-performance numerical routines accelerated with the **Numba J
 The use of **Numba** significantly reduces computation time in derivative evaluation and large-scale bifurcation analysis, enabling efficient exploration of variable-order fractional models.
 
 
-
 This package is part of an ongoing research project on variable-order fractional modeling and its applications in nonlinear system analysis. The numerical schemes implemented are based on the finite-difference approximations described in:
 B. Parsa Moghaddam and J. A. Tenreiro Machado,
 “Extended Algorithms for Approximating Variable Order Fractional Derivatives with Applications,”
 Journal of Scientific Computing, 2017.
 DOI: 10.1007/s10915-016-0343-1.
-
-Authors
-
-Dr. Daniel Clemente-López
-Department of Electronics, Instituto Nacional de Astrofísica, Óptica y Electrónica (INAOE), Mexico
-
-Dr. Jesús M. Muñoz-Pacheco (Corresponding Author)
-Faculty of Electronics Sciences, Benemérita Universidad Autónoma de Puebla (BUAP), Mexico
-
-Dr. José de Jesús Rangel-Magdaleno
-Department of Electronics, Instituto Nacional de Astrofísica, Óptica y Electrónica (INAOE), Mexico
-
 
 # Repository Structure
 
@@ -55,8 +42,11 @@ VOFD/
 │   │__ sim_manager.py
 │
 ├── examples/              # Example scripts
-│   ├── simulation_setup.py
-│   ├── bifurcation_setup.py
+│   ├── sim_vo_ricatti.py
+│   ├── sim_vo_chen.py
+│   ├── sim_5Dvo_Lorenz.py
+│   ├── bif_vo_chen.py
+│   ├── bif_5Dvo_Lorenz.py
 │
 ├── LICENSE
 ├── README.md
@@ -104,43 +94,61 @@ Recommended workflow:
 3. Install the package:
 
    ```bash
-   pip install VOFD
+   pip install vofd
    ```
 
-4. Download the example scripts from the GitHub repository (`examples/`) and run:
+4. Download the example scripts from the GitHub repository (`examples/`) and run with python:
 
    ```bash
-   python simulation_setup.py
-   python bifurcation_setup.py
+   python sim_vo_chen.py
+   python bif_vo_chen.py
    ```
 
 ---
 
 ## **Option 2 — Clone the Repository and Install Locally**
 
-```bash
-git clone https://github.com/<your-user>/VOFD.git
-cd VOFD
-```
 
-Install in editable mode:
+1. Clone:
 
-```bash
-pip install -e .
-```
+   ```bash
+   git clone https://github.com/DClementeL/VOFD.git
+   cd VOFD
+   ```
+
+2. (Optional) activate a Python virtual environment:
+
+   **Linux/macOS**
+
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate
+   ```
+
+   **Windows**
+
+   ```powershell
+   python -m venv venv
+   .\venv\Scripts\activate
+   ```
+
+3. Install:
+
+   ```bash
+   pip install -e .
+   ```
 
 This provides access to:
 
 * Full source code (`vofd/`)
 * Example scripts (`examples/`)
-* Tests (`tests/`)
 * Development configuration
 
 ---
 
 Usage
 -----
-### Simulation Setup (simulation_setup.py)
+### Simulation Setup (sim_vo_chen.py)
 This script demonstrates how to set up and run a simulation for a --Variable-Order Chaotic Chen System--
 
 1. Setup the system: The script defines the Chen system, a commonly used chaotic system, with initial conditions and a time span.
@@ -151,10 +159,10 @@ This script demonstrates how to set up and run a simulation for a --Variable-Ord
 
 To run the simulation, simply execute:
 ```bash
-python simulation_setup.py
+python sim_vo_chen.py
 ```
 
-### Bifurcation Analysis Setup (bifurcation_setup.py)
+### Bifurcation Analysis Setup (bif_vo_chen.py)
 This script is used to perform --bifurcation analysis-- of the --Variable-Order Chaotic Chen System--. 
 
 1. Setup the system: Similar to the simulation script, but this one focuses on analyzing how the system behavior changes as the bifurcation parameter (in this case the `a` parameter), varies.
@@ -165,20 +173,20 @@ This script is used to perform --bifurcation analysis-- of the --Variable-Order 
 
 To run the bifurcation analysis, execute:
 ```bash
-python bifurcation_setup.py
+python bif_vo_chen.py
 ```
 
 Key Functions
 -------------
 **chen_system**: Defines the equations of the Chen system (used in both scripts).
 **vo_algorithm**: Variable-order derivative algorithm used for numerical integration.
-- In simulation_setup.py: you may use **v1_alg**, **v2_alg**, or **v3_alg**.
-- In bifurcation_setup.py: you may use **v1_bifurcation**, **v2_bifurcation**, or **v3_bifurcation**.
-**save_time_series**: Saves each state variable (y1, y2, y3) to .txt files (used in simulation_setup.py).
-**save_pairwise_plots**: Generates and saves pairwise phase-plane plots, e.g., y1–y2, y1–y3 (used in simulation_setup.py).
-**save_bifurcation_data**: Stores the bifurcation values (e.g., parameter sweep and maxima) into .txt files (used in bifurcation_setup.py).
-**create_figure**: Creates and saves time-series and phase-portrait plots (used in simulation_setup.py).
-**create_bif_figure**: Creates and saves the bifurcation diagram from the computed sweep data (used in bifurcation_setup.py).
+- In sim_vo_chen.py: you may use **v1_alg**, **v2_alg**, or **v3_alg**.
+- In bif_vo_chen.py: you may use **v1_bifurcation**, **v2_bifurcation**, or **v3_bifurcation**.
+
+**save_pairwise_plots**: Generates automatic pairwise phase-plane plots, e.g., y1–y2, y1–y3 and y2-y3.
+**create_xy_figure**: Plots phase portraits, time-evolution curves, and bifurcation diagrams with automatic axis scaling. Plot specifications are optional for phase portraits and time-evolution diagrams, while bifurcation diagrams require specifying the scatter plot option.
+**save_time_series**: Saves each state variable (y1, y2, y3) to .txt files.
+**save_bifurcation_data**: Stores the bifurcation values (e.g., parameter sweep and maxima) into .txt files.
 
 
 # Results Directory
